@@ -146,7 +146,7 @@
         /* Step 1: Base Selection */
         .base-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: 1fr;
             gap: 30px;
         }
 
@@ -265,7 +265,7 @@
 
         .grid-options {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr;
             gap: 20px;
         }
 
@@ -338,6 +338,7 @@
 
         .radio-group {
             display: flex;
+            flex-direction: column;
             gap: 15px;
         }
 
@@ -363,7 +364,7 @@
         /* Step 3: Drinks Expansion */
         .drinks-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: 1fr;
             gap: 25px;
         }
 
@@ -500,29 +501,41 @@
             transform: none;
         }
 
-        /* Confirm Screen */
-        .confirm-screen {
+        /* Confirm Screen Overlay */
+        .confirm-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--bg-color);
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
             z-index: 1000;
             display: none;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            padding: 40px;
+            padding: 20px;
         }
 
-        .order-id {
-            font-size: 5rem;
-            font-weight: 900;
-            color: var(--accent-primary);
-            margin: 30px 0;
-            text-shadow: 0 0 30px rgba(211, 195, 138, 0.3);
+        /* Confirm Modal Box */
+        .confirm-modal {
+            background: var(--bg-color);
+            border: 1px solid rgba(211, 195, 138, 0.2);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
     </style>
@@ -606,7 +619,7 @@
 
             <div class="custom-section">
                 <div class="section-title">Preference vývaru</div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                <div style="display: grid; grid-template-columns: 1fr; gap: 40px;">
                     <div>
                         <p style="margin-bottom: 20px; font-weight: 600; color: var(--text-dim)">Intenzita chuti</p>
                         <div class="radio-group" id="intensity-group">
@@ -651,20 +664,19 @@
         </div>
         <div class="nav-btns">
             <button class="btn btn-outline" id="prev-btn" onclick="prevStep()" style="visibility: hidden;">Zpět</button>
-            <button class="btn btn-primary" id="next-btn" onclick="nextStep()" disabled>
+            <button class="btn btn-primary" id="next-btn" onclick="nextStep()" style="display: none;" disabled>
                 Pokračovat
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
             </button>
         </div>
     </footer>
 
-    <div id="confirm-screen" class="confirm-screen">
-        <svg viewBox="0 0 24 24" width="100" height="100" fill="var(--accent-primary)"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-        <h2 style="font-size: 2.5rem; margin-top: 30px; margin-bottom: 0;">Objednávka přijata!</h2>
-        <p style="color: var(--text-dim); margin-top: 10px;">Váš ramen se již připravuje v kuchyni.</p>
-        <div class="order-id" id="final-order-id">#82</div>
-        <p>Robotické rameno vám jídlo přiveze za 5–10 min.</p>
-        <button class="btn btn-primary" style="margin-top: 50px" onclick="location.reload()">Nová objednávka</button>
+    <div id="confirm-screen" class="confirm-overlay">
+        <div class="confirm-modal">
+            <svg viewBox="0 0 24 24" width="80" height="80" fill="var(--accent-primary)"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            <h2 style="font-size: 2rem; margin-top: 30px; margin-bottom: 0;">Váše objednávka se připravuje</h2>
+            <button class="btn btn-primary" style="margin-top: 40px; justify-content: center; width: 100%;" onclick="location.reload()">Zavřít</button>
+        </div>
     </div>
 
     <script>
@@ -773,6 +785,12 @@
             const nextBtn = document.getElementById('next-btn');
             if(nextBtn) nextBtn.disabled = false;
             updatePrice();
+            
+            setTimeout(() => {
+                if (state.currentStep === 1) {
+                    nextStep();
+                }
+            }, 400);
         }
 
         function adjustItem(category, id, delta) {
@@ -833,7 +851,12 @@
             const prevBtn = document.getElementById('prev-btn');
             if(prevBtn) prevBtn.style.visibility = state.currentStep === 1 ? 'hidden' : 'visible';
             const nextBtn = document.getElementById('next-btn');
-            if(nextBtn) nextBtn.innerText = state.currentStep === 4 ? 'Odeslat objednávku' : 'Pokračovat';
+            if(nextBtn) {
+                nextBtn.style.display = state.currentStep === 1 ? 'none' : 'flex';
+                nextBtn.innerHTML = state.currentStep === 4 
+                    ? 'Odeslat objednávku' 
+                    : 'Pokračovat <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>';
+            }
             const mainEl = document.querySelector('main');
             if(mainEl) mainEl.scrollTop = 0;
         }
@@ -892,8 +915,7 @@
                 });
 
                 if (response.ok) {
-                    alert("Objednávka byla úspěšně odeslána!");
-                    location.reload();
+                    document.getElementById('confirm-screen').style.display = 'flex';
                 } else {
                     alert("Chyba při odesílání. Zkuste to prosím znovu.");
                     if(nextBtn) {
