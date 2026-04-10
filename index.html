@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="cs">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -130,8 +131,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         h2 {
@@ -168,7 +176,7 @@
         .base-card.selected {
             border-color: var(--accent-primary);
             background: #22201a;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
         }
 
         .food-img-container {
@@ -525,7 +533,7 @@
             text-align: center;
             max-width: 500px;
             width: 100%;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
             animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: column;
@@ -533,17 +541,27 @@
         }
 
         @keyframes popIn {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
 
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
     </style>
 </head>
+
 <body>
 
     <header>
         <div class="logo">
-            <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor"><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/></svg>
+            <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor">
+                <path
+                    d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z" />
+            </svg>
             Simply Solo
         </div>
         <div class="progress-bar">
@@ -573,10 +591,13 @@
             <div class="base-grid">
                 <div class="base-card" onclick="selectBase('tonkotsu', 'Tonkotsu Ramen', 175)">
                     <div class="food-img-container">
-                        <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=80" alt="Tonkotsu">
+                        <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=80"
+                            alt="Tonkotsu">
                     </div>
                     <div class="check-mark">
-                        <svg viewBox="0 0 24 24" width="20" height="20" fill="#000"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="#000">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
+                        </svg>
                     </div>
                     <h3>Tonkotsu Ramen</h3>
                     <div class="price-tag">175 Kč</div>
@@ -584,10 +605,13 @@
                 </div>
                 <div class="base-card" onclick="selectBase('shoyu', 'Shoyu Ramen', 165)">
                     <div class="food-img-container">
-                        <img src="https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=800&q=80" alt="Shoyu">
+                        <img src="https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=800&q=80"
+                            alt="Shoyu">
                     </div>
                     <div class="check-mark">
-                        <svg viewBox="0 0 24 24" width="20" height="20" fill="#000"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="#000">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
+                        </svg>
                     </div>
                     <h3>Shoyu Ramen</h3>
                     <div class="price-tag">165 Kč</div>
@@ -595,10 +619,13 @@
                 </div>
                 <div class="base-card" onclick="selectBase('miso', 'Miso Ramen', 170)">
                     <div class="food-img-container">
-                        <img src="https://images.unsplash.com/photo-1623341214825-9f4f963727da?auto=format&fit=crop&w=800&q=80" alt="Miso">
+                        <img src="https://images.unsplash.com/photo-1623341214825-9f4f963727da?auto=format&fit=crop&w=800&q=80"
+                            alt="Miso">
                     </div>
                     <div class="check-mark">
-                        <svg viewBox="0 0 24 24" width="20" height="20" fill="#000"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="#000">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
+                        </svg>
                     </div>
                     <h3>Miso Ramen</h3>
                     <div class="price-tag">170 Kč</div>
@@ -610,7 +637,7 @@
         <!-- Step 2 -->
         <div class="step-content" id="step-2">
             <h2>Personalizujte svůj ramen</h2>
-            
+
             <div class="custom-section">
                 <div class="section-title">Přídavné ingredience</div>
                 <div class="grid-options" id="topping-options"></div>
@@ -630,9 +657,9 @@
                     <div>
                         <p style="margin-bottom: 20px; font-weight: 600; color: var(--text-dim)">Pálivost</p>
                         <div class="radio-group" id="spiciness-group">
-                            <div class="radio-btn selected" onclick="selectRadio('spiciness', 'Bez')">Bez</div>
-                            <div class="radio-btn" onclick="selectRadio('spiciness', 'Mírná')">Mírná</div>
-                            <div class="radio-btn" onclick="selectRadio('spiciness', 'Pálivá')">Pálivá</div>
+                            <div class="radio-btn selected" onclick="selectRadio('spiciness', 'Nepálivý')">Nepálivý</div>
+                            <div class="radio-btn" onclick="selectRadio('spiciness', 'Jemná')">Jemná</div>
+                            <div class="radio-btn" onclick="selectRadio('spiciness', 'Silná')">Silná</div>
                         </div>
                     </div>
                 </div>
@@ -665,28 +692,40 @@
             <button class="btn btn-outline" id="prev-btn" onclick="prevStep()" style="visibility: hidden;">Zpět</button>
             <button class="btn btn-primary" id="next-btn" onclick="nextStep()" style="display: none;" disabled>
                 Pokračovat
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" />
+                </svg>
             </button>
         </div>
     </footer>
 
     <div id="confirm-screen" class="confirm-overlay">
         <div class="confirm-modal">
-            <svg viewBox="0 0 24 24" width="80" height="80" fill="var(--accent-primary)"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            <svg viewBox="0 0 24 24" width="80" height="80" fill="var(--accent-primary)">
+                <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+            </svg>
             <h2 style="font-size: 2rem; margin-top: 30px; margin-bottom: 0;">Váše objednávka se připravuje</h2>
-            <button class="btn btn-primary" style="margin-top: 40px; justify-content: center; width: 100%;" onclick="location.reload()">Zavřít</button>
+            <button class="btn btn-primary" style="margin-top: 40px; justify-content: center; width: 100%;"
+                onclick="location.reload()">Zavřít</button>
         </div>
     </div>
 
     <div id="upsell-overlay" class="confirm-overlay" style="z-index: 2000; padding: 10px;">
-        <div class="confirm-modal" id="upsell-modal-content" style="max-width: 800px; padding: 30px; position: relative; overflow: hidden; padding-bottom: 20px;">
+        <div class="confirm-modal" id="upsell-modal-content"
+            style="max-width: 800px; padding: 30px; position: relative; overflow: hidden; padding-bottom: 20px;">
             <h2 style="font-size: 1.8rem; margin-top: 10px; margin-bottom: 10px;">Chcete přidat ještě něco?</h2>
             <p style="color: var(--text-dim); margin-bottom: 25px;">Speciální nabídka, která vyprší za 30 vteřin.</p>
-            <div id="upsell-items-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 30px; width: 100%;">
+            <div id="upsell-items-grid"
+                style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 30px; width: 100%;">
             </div>
-            <button class="btn btn-outline" style="width: 100%; justify-content: center;" onclick="skipUpsell()">Odeslat původní objednávku</button>
-            <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 6px; background: rgba(255,255,255,0.1);">
-                <div id="upsell-timer-bar" style="height: 100%; width: 100%; background: var(--accent-primary); transition: width 0.1s linear;"></div>
+            <button class="btn btn-outline" style="width: 100%; justify-content: center;" onclick="skipUpsell()">Odeslat
+                objednávku</button>
+            <div
+                style="position: absolute; bottom: 0; left: 0; width: 100%; height: 6px; background: rgba(255,255,255,0.1);">
+                <div id="upsell-timer-bar"
+                    style="height: 100%; width: 100%; background: var(--accent-primary); transition: width 0.1s linear;">
+                </div>
             </div>
         </div>
 
@@ -694,8 +733,10 @@
             <h2 style="font-size: 1.8rem; margin-bottom: 20px;">Produkt přidán!</h2>
             <p style="color: var(--text-dim); margin-bottom: 30px;">Vaše objednávka byla aktualizována.</p>
             <div style="display: flex; flex-direction: column; gap: 15px; width: 100%;">
-                <button class="btn btn-primary" style="justify-content: center;" onclick="finalSubmitFromUpsell()">Odeslat objednávku</button>
-                <button class="btn btn-outline" style="justify-content: center;" onclick="continueShopping()">Pokračovat v nákupu</button>
+                <button class="btn btn-primary" style="justify-content: center;"
+                    onclick="finalSubmitFromUpsell()">Odeslat objednávku</button>
+                <button class="btn btn-outline" style="justify-content: center;" onclick="continueShopping()">Pokračovat
+                    v nákupu</button>
             </div>
         </div>
     </div>
@@ -709,7 +750,7 @@
                 sides: {},
                 drinks: {},
                 intensity: 'Střední',
-                spiciness: 'Bez'
+                spiciness: 'Nepálivý'
             },
             totalPrice: 0,
             upsellDiscount: 0
@@ -718,12 +759,12 @@
 
         const data = {
             main: [
-                { id: 'chashu_pork', name: 'Chashu vepřové (2ks)', price: 55 },
-                { id: 'chashu_chicken', name: 'Kuřecí chashu', price: 50 },
-                { id: 'ajitama', name: 'Ajitama vejce', price: 25 },
-                { id: 'bamboo', name: 'Bambusové výhonky', price: 28 },
-                { id: 'nori', name: 'Extra Nori řasa', price: 18 },
-                { id: 'corn', name: 'Kukuřice sladká', price: 12 }
+                { id: 'chashu_pork', name: 'Chashu vepřové (2ks)', price: 55, img: 'https://images.unsplash.com/photo-1623341214825-9f4f963727da?auto=format&fit=crop&w=400&q=80' },
+                { id: 'chashu_chicken', name: 'Kuřecí chashu', price: 50, img: 'https://images.unsplash.com/photo-1564834724105-918b73d1b9e0?auto=format&fit=crop&w=400&q=80' },
+                { id: 'ajitama', name: 'Ajitama vejce', price: 25, img: 'https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=400&q=80' },
+                { id: 'bamboo', name: 'Bambusové výhonky', price: 28, img: './bamboo.png' },
+                { id: 'nori', name: 'Extra Nori řasa', price: 18, img: './nori.png' },
+                { id: 'corn', name: 'Kukuřice sladká', price: 12, img: './corn.png' }
             ],
             sides: [
                 { id: 'gyoza', name: 'Gyoza knedlíčky (4ks)', price: 75, img: 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=600&q=80' },
@@ -757,14 +798,17 @@
 
         function renderToppings() {
             const container = document.getElementById('topping-options');
-            if(container) {
+            if (container) {
                 container.innerHTML = data.main.map(item => `
-                    <div class="option-item">
-                        <div class="option-info">
-                            <h4>${item.name}</h4>
-                            <span>+${item.price} Kč</span>
+                    <div class="option-item" style="padding: 20px;">
+                        <div style="display: flex; align-items: center; gap: 20px;">
+                            ${item.img ? `<img src="${item.img}" style="width: 85px; height: 85px; border-radius: 12px; object-fit: cover;" alt="${item.name}">` : ''}
+                            <div class="option-info">
+                                <h4 style="font-size: 1.15rem; margin-bottom: 8px;">${item.name}</h4>
+                                <span style="font-size: 1.1rem; color: var(--accent-primary); font-weight: 600;">+${item.price} Kč</span>
+                            </div>
                         </div>
-                        <div class="controls">
+                        <div class="controls" style="transform: scale(1.15); transform-origin: right center;">
                             <button class="btn-round" onclick="adjustItem('main', '${item.id}', -1)">${icons.minus}</button>
                             <div class="count" id="count-${item.id}">0</div>
                             <button class="btn-round" onclick="adjustItem('main', '${item.id}', 1)">${icons.plus}</button>
@@ -776,7 +820,7 @@
 
         function renderDynamicCategory(category, containerId, isGrid = false) {
             const container = document.getElementById(containerId);
-            if(container) {
+            if (container) {
                 container.className = isGrid ? 'drinks-grid' : 'grid-options';
                 container.innerHTML = data[category].map(item => `
                     <div class="drink-card">
@@ -806,9 +850,9 @@
             document.querySelectorAll('.base-card').forEach(card => card.classList.remove('selected'));
             event.currentTarget.classList.add('selected');
             const nextBtn = document.getElementById('next-btn');
-            if(nextBtn) nextBtn.disabled = false;
+            if (nextBtn) nextBtn.disabled = false;
             updatePrice();
-            
+
             setTimeout(() => {
                 if (state.currentStep === 1) {
                     nextStep();
@@ -829,10 +873,10 @@
             state.customization[category] = value;
             const containerId = category === 'intensity' ? 'intensity-group' : 'spiciness-group';
             const container = document.getElementById(containerId);
-            if(container) {
+            if (container) {
                 const buttons = container.querySelectorAll('.radio-btn');
                 buttons.forEach(btn => {
-                    if (btn.innerText === value) btn.classList.add('selected');
+                    if (btn.innerText.trim() === value) btn.classList.add('selected');
                     else btn.classList.remove('selected');
                 });
             }
@@ -846,10 +890,10 @@
                     total += (state.customization[cat][item.id] || 0) * item.price;
                 });
             }
-            if(state.upsellDiscount) total -= state.upsellDiscount;
+            if (state.upsellDiscount) total -= state.upsellDiscount;
             state.totalPrice = total;
             const totalEl = document.getElementById('footer-total');
-            if(totalEl) totalEl.innerText = `${total} Kč`;
+            if (totalEl) totalEl.innerText = `${total} Kč`;
         }
 
         function nextStep() {
@@ -873,22 +917,22 @@
             document.querySelectorAll('.step-content').forEach((s, i) => s.classList.toggle('active', i + 1 === state.currentStep));
             document.querySelectorAll('.step-indicator').forEach((ind, i) => ind.classList.toggle('active', i + 1 === state.currentStep));
             const prevBtn = document.getElementById('prev-btn');
-            if(prevBtn) prevBtn.style.visibility = state.currentStep === 1 ? 'hidden' : 'visible';
+            if (prevBtn) prevBtn.style.visibility = state.currentStep === 1 ? 'hidden' : 'visible';
             const nextBtn = document.getElementById('next-btn');
-            if(nextBtn) {
+            if (nextBtn) {
                 nextBtn.style.display = state.currentStep === 1 ? 'none' : 'flex';
-                nextBtn.innerHTML = state.currentStep === 4 
-                    ? 'Odeslat objednávku' 
+                nextBtn.innerHTML = state.currentStep === 4
+                    ? 'Odeslat objednávku'
                     : 'Pokračovat <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>';
             }
             const mainEl = document.querySelector('main');
-            if(mainEl) mainEl.scrollTop = 0;
+            if (mainEl) mainEl.scrollTop = 0;
         }
 
         function renderSummary() {
             const container = document.getElementById('summary-container');
-            if(!container || !state.base) return;
-            
+            if (!container || !state.base) return;
+
             let itemsHtml = `<div class="summary-row"><strong>${state.base.name}</strong><span>${state.base.price} Kč</span></div>`;
             itemsHtml += `<div style="padding-bottom: 15px; color: var(--text-dim); font-size: 0.9rem;">${state.customization.intensity} vývar, ${state.customization.spiciness} pálivost</div>`;
 
@@ -900,7 +944,7 @@
                     }
                 });
             }
-            if(state.upsellDiscount) {
+            if (state.upsellDiscount) {
                 itemsHtml += `<div class="summary-row" style="color: var(--accent-primary);">Speciální sleva<span>-${state.upsellDiscount} Kč</span></div>`;
             }
             itemsHtml += `<div class="summary-row" style="margin-top: 20px;">CELKEM<span>${state.totalPrice} Kč</span></div>`;
@@ -913,7 +957,7 @@
 
         function showUpsellModal() {
             const nextBtn = document.getElementById('next-btn');
-            if(nextBtn) {
+            if (nextBtn) {
                 nextBtn.disabled = true;
                 nextBtn.innerText = 'Připravuji...';
             }
@@ -924,7 +968,7 @@
                     allItems.push({ ...item, category: cat });
                 });
             }
-            
+
             const shuffled = allItems.sort(() => 0.5 - Math.random());
             const selected = shuffled.slice(0, 6);
 
@@ -953,7 +997,7 @@
             const bar = document.getElementById('upsell-timer-bar');
             bar.style.transition = 'none';
             bar.style.width = '100%';
-            
+
             void bar.offsetWidth; // force reflow
             bar.style.transition = 'width 30s linear';
             bar.style.width = '0%';
@@ -968,7 +1012,7 @@
             state.customization[category][id] = (state.customization[category][id] || 0) + 1;
             state.upsellDiscount += (data[category].find(i => i.id === id).price - customPrice);
             updatePrice();
-            
+
             document.getElementById('upsell-modal-content').style.display = 'none';
             document.getElementById('upsell-action-content').style.display = 'flex';
         }
@@ -976,11 +1020,11 @@
         function continueShopping() {
             document.getElementById('upsell-action-content').style.display = 'none';
             document.getElementById('upsell-modal-content').style.display = 'flex';
-            
+
             const bar = document.getElementById('upsell-timer-bar');
             bar.style.transition = 'none';
             bar.style.width = '100%';
-            
+
             void bar.offsetWidth; // force reflow
             bar.style.transition = 'width 30s linear';
             bar.style.width = '0%';
@@ -1004,7 +1048,7 @@
 
         async function executeActualSubmit() {
             const nextBtn = document.getElementById('next-btn');
-            if(nextBtn) {
+            if (nextBtn) {
                 nextBtn.disabled = true;
                 nextBtn.innerText = 'Odesílám...';
             }
@@ -1041,14 +1085,14 @@
                     document.getElementById('confirm-screen').style.display = 'flex';
                 } else {
                     alert("Chyba při odesílání. Zkuste to prosím znovu.");
-                    if(nextBtn) {
+                    if (nextBtn) {
                         nextBtn.disabled = false;
                         nextBtn.innerText = 'Odeslat objednávku';
                     }
                 }
             } catch (error) {
                 alert("Došlo k chybě připojení k serveru.");
-                if(nextBtn) {
+                if (nextBtn) {
                     nextBtn.disabled = false;
                     nextBtn.innerText = 'Odeslat objednávku';
                 }
@@ -1058,5 +1102,5 @@
         init();
     </script>
 </body>
+
 </html>
-       
