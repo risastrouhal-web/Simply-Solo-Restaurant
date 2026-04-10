@@ -678,6 +678,28 @@
         </div>
     </div>
 
+    <div id="upsell-overlay" class="confirm-overlay" style="z-index: 2000; padding: 10px;">
+        <div class="confirm-modal" id="upsell-modal-content" style="max-width: 800px; padding: 30px; position: relative; overflow: hidden; padding-bottom: 20px;">
+            <h2 style="font-size: 1.8rem; margin-top: 10px; margin-bottom: 10px;">Chcete přidat ještě něco?</h2>
+            <p style="color: var(--text-dim); margin-bottom: 25px;">Speciální nabídka, která vyprší za 30 vteřin.</p>
+            <div id="upsell-items-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 30px; width: 100%;">
+            </div>
+            <button class="btn btn-outline" style="width: 100%; justify-content: center;" onclick="skipUpsell()">Odeslat původní objednávku</button>
+            <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 6px; background: rgba(255,255,255,0.1);">
+                <div id="upsell-timer-bar" style="height: 100%; width: 100%; background: var(--accent-primary); transition: width 0.1s linear;"></div>
+            </div>
+        </div>
+
+        <div class="confirm-modal" id="upsell-action-content" style="max-width: 500px; display: none;">
+            <h2 style="font-size: 1.8rem; margin-bottom: 20px;">Produkt přidán!</h2>
+            <p style="color: var(--text-dim); margin-bottom: 30px;">Vaše objednávka byla aktualizována.</p>
+            <div style="display: flex; flex-direction: column; gap: 15px; width: 100%;">
+                <button class="btn btn-primary" style="justify-content: center;" onclick="finalSubmitFromUpsell()">Odeslat objednávku</button>
+                <button class="btn btn-outline" style="justify-content: center;" onclick="continueShopping()">Pokračovat v nákupu</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         const state = {
             currentStep: 1,
@@ -689,8 +711,10 @@
                 intensity: 'Střední',
                 spiciness: 'Bez'
             },
-            totalPrice: 0
+            totalPrice: 0,
+            upsellDiscount: 0
         };
+        let upsellTimeout;
 
         const data = {
             main: [
@@ -822,6 +846,7 @@
                     total += (state.customization[cat][item.id] || 0) * item.price;
                 });
             }
+            if(state.upsellDiscount) total -= state.upsellDiscount;
             state.totalPrice = total;
             const totalEl = document.getElementById('footer-total');
             if(totalEl) totalEl.innerText = `${total} Kč`;
@@ -875,11 +900,109 @@
                     }
                 });
             }
+            if(state.upsellDiscount) {
+                itemsHtml += `<div class="summary-row" style="color: var(--accent-primary);">Speciální sleva<span>-${state.upsellDiscount} Kč</span></div>`;
+            }
             itemsHtml += `<div class="summary-row" style="margin-top: 20px;">CELKEM<span>${state.totalPrice} Kč</span></div>`;
             container.innerHTML = itemsHtml;
         }
 
-        async function finishOrder() {
+        function finishOrder() {
+            showUpsellModal();
+        }
+
+        function showUpsellModal() {
+            const nextBtn = document.getElementById('next-btn');
+            if(nextBtn) {
+                nextBtn.disabled = true;
+                nextBtn.innerText = 'Připravuji...';
+            }
+
+            const allItems = [];
+            for (let cat in data) {
+                data[cat].forEach(item => {
+                    allItems.push({ ...item, category: cat });
+                });
+            }
+            
+            const shuffled = allItems.sort(() => 0.5 - Math.random());
+            const selected = shuffled.slice(0, 6);
+
+            const grid = document.getElementById('upsell-items-grid');
+            grid.innerHTML = selected.map(item => {
+                const discPrice = Math.round(item.price * 0.95);
+                const imgHtml = item.img ? `<div class="drink-img-container" style="height:100px;"><img src="${item.img}" style="width:100%;height:100%;object-fit:cover;"></div>` : '';
+                return `
+                    <div class="drink-card" style="cursor: pointer;" onclick="acceptUpsell('${item.category}', '${item.id}', ${discPrice})">
+                        ${imgHtml}
+                        <div style="padding: 15px; text-align: left;">
+                            <h4 style="font-size:0.95rem;">${item.name}</h4>
+                            <div style="margin-top: 5px;">
+                                <span style="text-decoration: line-through; color: var(--text-dim); font-size:0.8rem;">${item.price} Kč</span>
+                                <span style="color: var(--accent-primary); font-weight: 700; margin-left: 10px;">${discPrice} Kč</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('upsell-overlay').style.display = 'flex';
+            document.getElementById('upsell-modal-content').style.display = 'flex';
+            document.getElementById('upsell-action-content').style.display = 'none';
+
+            const bar = document.getElementById('upsell-timer-bar');
+            bar.style.transition = 'none';
+            bar.style.width = '100%';
+            
+            void bar.offsetWidth; // force reflow
+            bar.style.transition = 'width 30s linear';
+            bar.style.width = '0%';
+
+            upsellTimeout = setTimeout(() => {
+                skipUpsell();
+            }, 30000);
+        }
+
+        function acceptUpsell(category, id, customPrice) {
+            clearTimeout(upsellTimeout);
+            state.customization[category][id] = (state.customization[category][id] || 0) + 1;
+            state.upsellDiscount += (data[category].find(i => i.id === id).price - customPrice);
+            updatePrice();
+            
+            document.getElementById('upsell-modal-content').style.display = 'none';
+            document.getElementById('upsell-action-content').style.display = 'flex';
+        }
+
+        function continueShopping() {
+            document.getElementById('upsell-action-content').style.display = 'none';
+            document.getElementById('upsell-modal-content').style.display = 'flex';
+            
+            const bar = document.getElementById('upsell-timer-bar');
+            bar.style.transition = 'none';
+            bar.style.width = '100%';
+            
+            void bar.offsetWidth; // force reflow
+            bar.style.transition = 'width 30s linear';
+            bar.style.width = '0%';
+
+            clearTimeout(upsellTimeout);
+            upsellTimeout = setTimeout(() => {
+                skipUpsell();
+            }, 30000);
+        }
+
+        function skipUpsell() {
+            clearTimeout(upsellTimeout);
+            document.getElementById('upsell-overlay').style.display = 'none';
+            executeActualSubmit();
+        }
+
+        function finalSubmitFromUpsell() {
+            document.getElementById('upsell-overlay').style.display = 'none';
+            executeActualSubmit();
+        }
+
+        async function executeActualSubmit() {
             const nextBtn = document.getElementById('next-btn');
             if(nextBtn) {
                 nextBtn.disabled = true;
@@ -890,6 +1013,7 @@
                 zaklad: state.base ? state.base.name : 'Nevybráno',
                 detaily: `${state.customization.intensity} vývar, ${state.customization.spiciness} pálivost`,
                 polozky: [],
+                sleva: state.upsellDiscount ? `-${state.upsellDiscount} Kč` : '0 Kč',
                 celkova_cena: `${state.totalPrice} Kč`
             };
 
