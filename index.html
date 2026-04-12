@@ -765,7 +765,7 @@
             sides: [
                 { id: 'gyoza', name: 'Gyoza knedlíčky (4ks)', price: 75, img: 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=600&q=80' },
                 { id: 'edamame', name: 'Edamame se solí', price: 39, img: 'https://images.services.kitchenstories.io/gwBULxPG7Q4QmFzkK_SoUCNJYKA=/3840x0/filters:quality(85)/images.kitchenstories.io/wagtailOriginalImages/R2958-final-photo-.jpg' },
-                { id: 'rice', name: 'Miska rýže Gohan', price: 25, img: 'https://cdn.cdkitchen.com/recipes/images/2020/08/34215-9235-mx.jpg' }
+                { id: 'rice', name: 'Miska rýže Gohan', price: 25, img: 'https://static01.nyt.com/images/2018/02/21/dining/00RICEGUIDE8/00RICEGUIDE8-threeByTwoLargeAt2X.jpg' }
             ],
             drinks: [
                 { id: 'tea', name: 'Zelený čaj Sencha', price: 45, img: 'https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?auto=format&fit=crop&w=600&q=80' },
@@ -821,7 +821,7 @@
                 container.innerHTML = data[category].map(item => `
                     <div class="drink-card">
                         <div class="drink-img-container">
-                            <img src="${item.img}" alt="${item.name}" class="drink-img" style="${item.id === 'rice' ? 'object-fit: contain;' : ''}">
+                            <img src="${item.img}" alt="${item.name}" class="drink-img">
                         </div>
                         <div class="drink-details">
                             <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
